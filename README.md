@@ -12,7 +12,7 @@ targets during peak season, using weather and UK calendar data.
 2. Exploratory analysis
 3. Forecast models vs a moving-average baseline (done)
 4. Capacity calculator (parcels -> labour hours -> headcount) (done)
-5. Dashboard (next)
+5. Dashboard (done)
 6. Optional AWS layer (S3, Lambda, Athena)
 
 ## Run it
