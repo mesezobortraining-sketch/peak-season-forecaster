@@ -2,16 +2,17 @@
 
 Run from the project folder with:  python -m streamlit run app.py
 
-Reads the forecast saved by notebooks/03_forecast_baseline.ipynb and lets you
+Reads the forecast saved by run_forecast.py and lets you
 change the planning assumptions to see how headcount and shortfalls respond.
 Operations data is synthetic (see README).
 """
 import sqlite3
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import streamlit as st
+
+from src.capacity import headcount_needed
 
 DB_PATH = Path(__file__).resolve().parent / "data" / "processed" / "forecaster.db"
 
@@ -29,18 +30,11 @@ def load_data():
     return forecast.set_index("date"), float(uph.median())
 
 
-def headcount_needed(parcels, target_uph, hours_per_associate, absence_rate):
-    """Parcels -> labour hours -> people, allowing for absence."""
-    labour_hours = parcels / target_uph
-    people = labour_hours / hours_per_associate / (1 - absence_rate)
-    return np.ceil(people)
-
-
 # ---------- Load data, with friendly errors ----------
 if not DB_PATH.exists():
     st.error(
-        "Database not found. Run the ingestion first (notebooks/01_run_ingestion), "
-        "then notebooks/03_forecast_baseline."
+        "Database not found. Run 'python run_ingestion.py' first, "
+        "then 'python run_forecast.py'."
     )
     st.stop()
 
@@ -48,8 +42,7 @@ try:
     forecast, default_uph = load_data()
 except Exception:
     st.error(
-        "The forecast table is missing. Run notebooks/03_forecast_baseline, "
-        "including the cell that saves 'forecast_peak_2025'."
+        "The forecast table is missing. Run 'python run_forecast.py' to create it."
     )
     st.stop()
 
