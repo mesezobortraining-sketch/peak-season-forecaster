@@ -90,6 +90,9 @@ src/
   load_db.py                write tables to SQLite
   forecast.py               features, baselines, model
   capacity.py               parcels -> headcount
-notebooks/           exploration and analysis (01 to 04)
+notebooks/           notebooks/
+  01_run_ingestion.ipynb            run the ingestion pipeline
+  02_exploration_and_forecast.ipynb charts, baselines and the forecast model
+  03_capacity.ipynb                 parcels -> headcount, buffer analysis
 images/              charts used in this README
 ```
