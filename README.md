@@ -5,6 +5,7 @@ Forecasts daily parcel volumes for the UK peak season and converts the forecast 
 > **Data note:** operations data (parcels, units per hour, labour hours, defects) is **synthetic**, generated in `src/generate_synthetic_ops.py`. Weather (Open-Meteo) and UK bank holidays (gov.uk) are real public data. No employer data is used.
 > Because the synthetic data was built with known patterns, the model scores show that the pipeline works, not that real-world demand is this predictable.
 
+<<<<<<< HEAD
 ## Pipeline
 
 1. Ingest and clean weather, calendar and synthetic operations data (done)
@@ -51,6 +52,15 @@ An interactive Streamlit app for testing planning assumptions (buffer, absence r
 - **Weather is not forecast.** The model uses the weather that actually happened. In real planning only a weather forecast would be available, so true accuracy would be lower.
 - **Seven-day horizon.** Lag features need data from at least a week before the day being predicted.
 - **Peak days are under-forecast.** The model tends to miss low on the highest-volume days, which is why the planning buffer matters. Tree-based models cannot predict beyond the volumes they trained on, so modelling the growth trend explicitly is the obvious next improvement.
+=======
+## Pipeline (in progress)
+1. Ingest and clean (done in this step)
+2. Exploratory analysis
+3. Forecast models vs a moving-average baseline (done)
+4. Capacity calculator (parcels -> labour hours -> headcount) (done)
+5. Dashboard (done)
+6. Optional AWS layer (S3, Lambda, Athena)
+>>>>>>> 561cfc083d42e92154e5720c4822af7d5bbba163
 
 ## Run it
 
